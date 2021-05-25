@@ -21,8 +21,8 @@ import java.util.Map;
  * @date: 2021-03-25
  */
 @Component
-@ServerEndpoint("/websocket/{sign}")
-public class WebSocketServer {
+@ServerEndpoint("/websocket2/{sign}")
+public class WebSocketServer2 {
 
     private static Map<String, List<Session>> connect = new HashMap<>();
 
@@ -38,7 +38,8 @@ public class WebSocketServer {
 
     @OnMessage
     public void onMessage(Session session, String message){
-        System.out.println("1----------" + message);
+
+        System.out.println("2----------" + message);
     }
 
     @OnClose
@@ -48,14 +49,6 @@ public class WebSocketServer {
     }
 
     public static void sendInfo(String sign, String text) throws IOException {
-        List<Session> sessions = connect.get(sign);
-        if (!CollectionUtils.isEmpty(sessions)) {
-            for (Session session : sessions) {
-                session.getBasicRemote().sendText(text);
-            }
-        }
-    }
-    public static void sendInfo2(String sign, String text) throws IOException {
         List<Session> sessions = connect.get(sign);
         if (!CollectionUtils.isEmpty(sessions)) {
             for (Session session : sessions) {
